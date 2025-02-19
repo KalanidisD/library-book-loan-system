@@ -1,4 +1,8 @@
 import javax.swing.*;
+import java.awt.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class GUI {
 
@@ -28,14 +32,13 @@ public class GUI {
         resultsTextArea.setBounds(0, 0, 1000, 500);
 
 
+
+
+
         frame.add(mainPanel);
         mainPanel.add(resultsButton);
         mainPanel.add(resultsScrollPane);
         mainPanel.add(resultsTextArea);
-
-       resultsButton.addActionListener(_ -> {
-           resultsTextArea.setText(queries.showUsers())
-       });
 
 
 
