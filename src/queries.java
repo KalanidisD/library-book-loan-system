@@ -31,13 +31,15 @@ public static void insertUser(user user){
 
 public static void showUsers(){                                                     //show all users method
     String query = "SELECT * FROM user";
+    String endOfLine = "Test";
         try{
             DatabaseConnection.StartConnection(); //establish connection
             PreparedStatement stmt =DatabaseConnection.conn.prepareStatement(query); //prepare the statement
 
             ResultSet rs = stmt.executeQuery();
 
-                while(rs.next()){                                                    //loop through users
+                while(rs.next()){
+                    //loop through users
                     int id = rs.getInt("id");
                     String name = rs.getString("name");
                     String surname = rs.getString("surname");
@@ -47,8 +49,9 @@ public static void showUsers(){                                                 
                 }
             }
         catch (SQLException e) {
-            System.out.println("Problem "+e.getMessage());                              //closer connection
+            System.out.println("Problem "+e.getMessage());                              //close connection
                 }
             DatabaseConnection.closeConnection();
-    }
+            }
+
 }
