@@ -38,7 +38,7 @@ public class user {
         this.mail = mail;
     }
 
-    public void User(int id, String name, String surname, String email){
+    public user(int id, String name, String surname, String email){
         this.id = id;
         this.name = name;
         this.surname = surname;
