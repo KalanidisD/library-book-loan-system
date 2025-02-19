@@ -10,32 +10,31 @@ public class DatabaseConnection {
     private static final String USER="root";
     private static final String PASSWORD="";
     public static Connection conn;
-    //Test connection method
 
-    public static void StartConnection(){
+    public static void StartConnection(){                               //Start connection method
         try {
-
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(url,USER,PASSWORD);
+
             //if success
             System.out.println("Connected to database established!");
+            }
 
-        }catch(Exception e){
+        catch(Exception e){
+
             //if false
             System.out.println("Connection failed "+e.getMessage());
-        }
-
-        }
-
-    public static void closeConnection(){
-       try{
-           conn.close();
-           System.out.println("Connection closed successfully!");
-
          }
+        }
+
+    public static void closeConnection(){                               //close connection method
+      try{
+          conn.close();
+          System.out.println("Connection closed successfully!");
+        }
+
        catch (SQLException e) {
            System.out.println("Connection Failed to close");
        }
-    }
-
+   }
 };

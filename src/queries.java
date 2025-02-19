@@ -1,3 +1,4 @@
+import java.awt.print.Book;
 import java.io.InputStream;
 import java.io.Reader;
 import java.math.BigDecimal;
@@ -28,4 +29,26 @@ public static void insertUser(user user){
 }
 
 
+public static void showUsers(){                                                     //show all users method
+    String query = "SELECT * FROM user";
+        try{
+            DatabaseConnection.StartConnection(); //establish connection
+            PreparedStatement stmt =DatabaseConnection.conn.prepareStatement(query); //prepare the statement
+
+            ResultSet rs = stmt.executeQuery();
+
+                while(rs.next()){                                                    //loop through users
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    String surname = rs.getString("surname");
+                    String mail = rs.getString("email");
+
+                    System.out.println(id + " " + name + " " + surname + " " + mail+ " ");
+                }
+            }
+        catch (SQLException e) {
+            System.out.println("Problem "+e.getMessage());                              //closer connection
+                }
+            DatabaseConnection.closeConnection();
+    }
 }
