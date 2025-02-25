@@ -11,7 +11,7 @@ import java.util.List;
 public class queries {
 
     public static void insertUser(user user) {
-        String query = "INSERT INTO user VALUES(?,?,?,?)";                               //query structure for inserting a new user
+        String query = "INSERT INTO users VALUES(?,?,?,?)";                               //query structure for inserting a new user
         try {
             DatabaseConnection.StartConnection(); //establish connection
             PreparedStatement stmt = DatabaseConnection.conn.prepareStatement(query); //prepare the statement
@@ -26,13 +26,13 @@ public class queries {
         } catch (Exception e) {
             System.out.println("Problem " + e.getMessage());
         }
-        DatabaseConnection.closeConnection();                                   //close the connection
+        //DatabaseConnection.closeConnection();                                   //close the connection
     }
 
 
     public static void showUsers() {                                                     //show all users method
 
-        String query = "SELECT * FROM user";
+        String query = "SELECT * FROM users";
         try {
 
             DatabaseConnection.StartConnection(); //establish connection
@@ -56,7 +56,6 @@ public class queries {
 
             }
             DatabaseConnection.closeConnection();
-
 
     }
 }
