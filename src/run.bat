@@ -1,0 +1,1 @@
+java -cp C:\Users\dimit\JavaLib\mysql-connector-j-9.2.0\mysql-connector-j-9.2.0.jar C:\Users\dimit\JavaProjects\src\LibrarySystem.java

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class queries {
 
-    public static void insertUser(user user) {
+ /*   public static void insertUser(user user) {
         String query = "INSERT INTO users VALUES(?,?,?,?)";                               //query structure for inserting a new user
         try {
             DatabaseConnection.StartConnection(); //establish connection
@@ -27,10 +27,10 @@ public class queries {
             System.out.println("Problem " + e.getMessage());
         }
         //DatabaseConnection.closeConnection();                                   //close the connection
-    }
+    }*/
 
 
-    public static void showUsers() {                                                     //show all users method
+ /*   public static void showUsers() {                                                     //show all users method
 
         String query = "SELECT * FROM users";
         try {
@@ -55,7 +55,7 @@ public class queries {
             System.out.println("Problem " + e.getMessage());                              //close connection
 
             }
-            DatabaseConnection.closeConnection();
+            //DatabaseConnection.closeConnection();
 
-    }
+    }*/
 }
