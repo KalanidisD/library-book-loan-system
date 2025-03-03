@@ -8,7 +8,7 @@ public class LibrarySystem{
             queries.showUsers();
       //     DatabaseConnection.StartConnection();
       // DatabaseConnection.closeConnection();
-       // GUI.mainFrame();
+       GUI.mainFrame();
     }
 
 }

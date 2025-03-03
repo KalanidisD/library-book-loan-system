@@ -23,16 +23,13 @@ public class DatabaseConnection {
 
         }
 
-
         catch(Exception e){
 
             //if false
             System.out.println("Connection failed "+e.getMessage());
 
          }
-
         }
-
     public static void closeConnection(){                               //close connection method
       try{
           conn.close();
