@@ -1,15 +1,11 @@
-import com.mysql.cj.xdevapi.Column;
-
 import javax.swing.*;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.Objects;
 import java.util.Vector;
 
 
@@ -113,7 +109,7 @@ public class GUI {
             addFrame.setLayout(null);
             addFrame.setSize(400,500);
             addFrame.setResizable(false);
-            
+
             JLabel id = new JLabel("ID");
             id.setBounds(42,40,100,30);
             id.setFont(new Font("ITALIC", Font.BOLD, 17));
@@ -134,7 +130,51 @@ public class GUI {
             email.setFont(new Font("ITALIC", Font.BOLD, 17));
             addFrame.add(email);
 
+            JTextArea idArea = new JTextArea();
+            idArea.setEditable(true);
+            idArea.setBounds(100,40,200,20);
+            addFrame.add(idArea);
 
+            JTextArea nameArea = new JTextArea();
+            nameArea.setEditable(true);
+            nameArea.setBounds(100,120,200,20);
+            addFrame.add(nameArea);
+
+            JTextArea surnameArea = new JTextArea();
+            surnameArea.setEditable(true);
+            surnameArea.setBounds(100,200,200,20);
+            addFrame.add(surnameArea);
+
+            JTextArea emailArea = new JTextArea();
+            emailArea.setEditable(true);
+            emailArea.setBounds(100,280,200,20);
+            addFrame.add(emailArea);
+
+            JButton addUserButton = new JButton("Add User");
+            addUserButton.setBounds(130,350,150,30);
+            addFrame.add(addUserButton);
+
+            addUserButton.addActionListener(r-> {
+                try{
+                    String query = "INSERT INTO users VALUES(?,?,?,?)";                               //query structure for inserting a new user
+
+                        DatabaseConnection.StartConnection(); //establish connection
+                        PreparedStatement stmt = DatabaseConnection.conn.prepareStatement(query); //prepare the statement
+
+                    stmt.setInt(1,  Integer.parseInt(idArea.getText()));
+                    stmt.setString(2, nameArea.getText());
+                    stmt.setString(3, surnameArea.getText());
+                    stmt.setString(4, emailArea.getText());
+
+                    stmt.executeUpdate();
+                    addFrame.setVisible(false);
+                    
+                    }
+                catch (SQLException p){
+                   System.out.println("Failed becuz ");
+                   p.printStackTrace();
+                }
+            });
         });
 
 
