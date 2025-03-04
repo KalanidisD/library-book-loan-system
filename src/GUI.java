@@ -230,6 +230,8 @@ public class GUI {
 
 
         });
+        ActionEvent fakeEvent=new ActionEvent(resultsButton,ActionEvent.ACTION_PERFORMED,"");
+        resultsButton.getActionListeners()[0].actionPerformed(fakeEvent);
         frame.setVisible(true);
 
 
