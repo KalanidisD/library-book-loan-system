@@ -9,16 +9,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Vector;
 
 
 public class GUI {
 
 
-
     public static void mainFrame() {
-        Vector data = new Vector();
-        Vector columnNames=new Vector();
+
 
         JFrame frame = new JFrame("Library Book Loan System"); // create item frame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       //frame settings
@@ -34,10 +33,39 @@ public class GUI {
         mainPanel.setBackground(Color.DARK_GRAY);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
 
-        JButton resultsButton = new JButton("Show results");   //create  results button
+        JTable usersTable = new JTable();
+
+        JScrollPane userPane = new JScrollPane(usersTable);
+
+        usersTable.setBackground(Color.DARK_GRAY);
+        usersTable.setForeground(Color.WHITE);
+        usersTable.setFont(new Font("ITALIC", Font.BOLD, 15));
+        usersTable.setShowGrid(true);
+        usersTable.setGridColor(Color.black);
+        usersTable.setBorder(BorderFactory.createLineBorder(Color.black));
+        usersTable.setBounds(0,0,400,499);
+
+        userPane.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+        userPane.setBounds(0,0,400,500);
+
+        JButton resultsButton = new JButton("Show all Users");   //create  results button
         resultsButton.setFocusable(false);
         resultsButton.setBounds(800,600,150,100);
 
+        JButton addButton = new JButton("Add User");
+        addButton.setFocusable(false);
+        addButton.setBounds(1000,600,150,100);
+
+        JLabel resultsLabel = new JLabel("Users");
+        resultsLabel.setFont(resultsLabel.getFont().deriveFont(Font.BOLD,25));
+        resultsLabel.setForeground(Color.BLACK);
+        resultsLabel.setBounds(200,0,100,45);
+
+        mainPanel.add(userPane);
+        frame.add(resultsLabel);
+        frame.add(addButton);
+        frame.add(resultsButton);
+        frame.add(mainPanel);
 
         resultsButton.addActionListener(e -> {
             try {
@@ -49,13 +77,24 @@ public class GUI {
                 ResultSetMetaData rsmd = rs.getMetaData();
                 int columns=rsmd.getColumnCount();
 
-                while (rs.next()) {
-                    Vector row = new Vector(columns);
-                    for(int i=1; i<= columns; i++) {
-                        row.add(rs.getObject(i));
-                    }
-                    data.add(row);
+                Vector <String>columnNames=new Vector<>();
+
+                for(int i=0;i<columns;i++){
+                    columnNames.add(rsmd.getColumnName(i+1));
                 }
+
+                Vector <Vector<Object>> data=new Vector <>();
+
+                while (rs.next()) {
+                    Vector <Object> row=new Vector <>();
+                    for(int j=0;j<columns;j++){
+                            Object value = rs.getObject(j+1);
+                            row.add(value);
+                        }
+                        data.add(row);
+                }
+                DefaultTableModel model = new DefaultTableModel(data,columnNames);
+                usersTable.setModel(model);
                 rs.close();
                 stmt.close();
             }
@@ -66,31 +105,42 @@ public class GUI {
             }
         });
 
-        DefaultTableModel model = new DefaultTableModel(data,columnNames );
-        JTable usersTable = new JTable(model);    //create user Table
-        usersTable.setBackground(Color.DARK_GRAY);
-        usersTable.setForeground(Color.WHITE);
-        usersTable.setFont(new Font("ITALIC", Font.BOLD, 15));
-        usersTable.setShowGrid(true);
-        usersTable.setGridColor(Color.black);
-        usersTable.setBorder(BorderFactory.createLineBorder(Color.black));
-        usersTable.setBounds(0,0,400,499);
+        addButton.addActionListener(e -> {
+            JFrame addFrame = new JFrame("Add User");
+            addFrame.setVisible(true);
+            addFrame.setTitle("Add User");
+            addFrame.setLocationRelativeTo(null);
+            addFrame.setLayout(null);
+            addFrame.setSize(400,500);
+            addFrame.setResizable(false);
+            
+            JLabel id = new JLabel("ID");
+            id.setBounds(42,40,100,30);
+            id.setFont(new Font("ITALIC", Font.BOLD, 17));
+            addFrame.add(id);
+
+            JLabel name = new JLabel("Name");
+            name.setBounds(23,120,100,30);
+            name.setFont(new Font("ITALIC", Font.BOLD, 17));
+            addFrame.add(name);
+
+            JLabel surname = new JLabel("Surname");
+            surname.setBounds(6,200,100,30);
+            surname.setFont(new Font("ITALIC", Font.BOLD, 17));
+            addFrame.add(surname);
+
+            JLabel email = new JLabel("E-mail");
+            email.setBounds(20,280,100,30);
+            email.setFont(new Font("ITALIC", Font.BOLD, 17));
+            addFrame.add(email);
 
 
-        JScrollPane userPane = new JScrollPane(usersTable);
-        userPane.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-        userPane.setBounds(0,0,400,500);
+        });
 
-        JLabel resultsLabel = new JLabel("Users");
-        resultsLabel.setFont(resultsLabel.getFont().deriveFont(Font.BOLD,25));
-        resultsLabel.setForeground(Color.BLACK);
-        resultsLabel.setBounds(200,0,100,45);
 
-        mainPanel.add(userPane);
-        frame.add(resultsButton);
-        frame.add(resultsLabel);
-        frame.add(mainPanel);
+            frame.setVisible(true);
+        }
 
-        frame.setVisible(true);
+
     };
-}
+
