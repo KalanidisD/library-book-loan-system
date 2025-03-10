@@ -9,7 +9,6 @@ public class events implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
 
-
         if (e.getSource() == GUI.deleteButton) {
             GUI.openDeleteFrame();
         }//end if --- opens a frame for deleting a user
@@ -24,5 +23,5 @@ public class events implements ActionListener {
         if (e.getSource() == GUI.addUserButton) {
             queries.insertUser();
         }//end if --- inserts a new user
-    }
+    }//end of actionPerformed
 }

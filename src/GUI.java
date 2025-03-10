@@ -139,7 +139,7 @@ public class GUI {
         addFrame.add(GUI.addUserButton);
     }// end of addFrame
 
-    public static void openDeleteFrame() {                                     //creates the frame for deletig a user
+    public static void openDeleteFrame() {                                     //creates the frame for deleting a user
 
         GUI.deleteFrame.setVisible(true);
         GUI.deleteFrame.setTitle("Delete User");
@@ -147,7 +147,7 @@ public class GUI {
         GUI.deleteFrame.setLayout(null);
         GUI.deleteFrame.setSize(400, 300);
         GUI.deleteFrame.setResizable(false);
-         
+
         GUI.helpMessage.setBounds(30, -45, 450, 150);
         GUI.helpMessage.setFont(new Font("ITALIC", Font.BOLD, 13));
         GUI.deleteFrame.add(GUI.helpMessage);
@@ -159,5 +159,5 @@ public class GUI {
         GUI.deleteUserButton.setBounds(100, 180, 150, 30);
         GUI.deleteFrame.add(GUI.deleteUserButton);
 
-    }
+    }// end of openDeleteFrame
 }
