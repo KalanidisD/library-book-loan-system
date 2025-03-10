@@ -1,0 +1,4 @@
+1.add sql books table
+2.create a panel/dedicated to books
+3.connect a user to books-test
+4.make the id of user auto-incrementing
