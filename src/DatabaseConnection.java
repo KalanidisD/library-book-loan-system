@@ -17,17 +17,13 @@ public class DatabaseConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn= DriverManager.getConnection(url,USER,PASSWORD);
             //conn = DriverManager.getConnection(url,USER,PASSWORD);
-
             //if success
             System.out.println("Connected to database established!");
-
         }
-
         catch(Exception e){
 
             //if false
             System.out.println("Connection failed "+e.getMessage());
-
          }
         }
     public static void closeConnection(){                               //close connection method
